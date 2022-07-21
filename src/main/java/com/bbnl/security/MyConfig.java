@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.bbnl.handler.CustomLoginFailureHandler;
+import com.bbnl.handler.CustomLoginSuccessHandler;
 import com.bbnl.handler.LoginSuccessHandler;
 
 @Configuration
@@ -18,21 +20,39 @@ import com.bbnl.handler.LoginSuccessHandler;
 @SuppressWarnings("deprecation")
 public class MyConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private LoginSuccessHandler successHandler;
+//	@Autowired
+//	private CustomLoginFailureHandler failureHandler;
 	
 	@Bean
-	public UserDetailsService getUserDetailsService() {
+	CustomLoginFailureHandler failureHandler() {
+		return new CustomLoginFailureHandler();
+	}
+	
+//	@Autowired
+//	private LoginSuccessHandler successHandler;
+	
+	@Bean
+	CustomLoginSuccessHandler successHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+	
+	@Bean
+	LoginSuccessHandler successHandlers() {
+		return new LoginSuccessHandler();
+	}
+	
+	@Bean
+	 UserDetailsService getUserDetailsService() {
 		return new UserDetailsServiceImpl();
 	}
+
+    @Bean
+    BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 	
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
+	 DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(this.getUserDetailsService());
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -60,7 +80,9 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 			.loginPage("/signin")
-			.successHandler(successHandler)
+			.failureHandler(failureHandler())
+			.successHandler(successHandler())
+			.successHandler(successHandlers())
 		.and()
 		.csrf().disable()
 		;

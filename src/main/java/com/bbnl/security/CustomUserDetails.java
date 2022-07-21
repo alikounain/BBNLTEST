@@ -7,17 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
 import com.bbnl.entity.User;
 
 @SuppressWarnings("serial")
+@Component
 public class CustomUserDetails implements UserDetails {
 
-	@Autowired
+	
 	private User user;
 
 	public CustomUserDetails(User user) {
 		super();
 		this.user = user;
+	}
+	
+	public CustomUserDetails() {
+		super();		
 	}
 
 	@Override
@@ -43,7 +50,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return user.isAccountNonLocked();
 	}
 
 	@Override
@@ -53,6 +60,11 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return user.isStatus();
+	}
+
+	public User getUser() {
+		// TODO Auto-generated method stub
+		return this.user;
 	}
 }

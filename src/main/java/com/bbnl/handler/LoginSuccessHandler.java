@@ -16,9 +16,11 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
+
+
 @Configuration
 public class LoginSuccessHandler extends  SimpleUrlAuthenticationSuccessHandler{
-
+	
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
@@ -30,7 +32,9 @@ public class LoginSuccessHandler extends  SimpleUrlAuthenticationSuccessHandler{
 		}
 		RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 		redirectStrategy.sendRedirect(request, response, targetUrl);
+		
 	}
+	
 
 	//Fetch the roles from Authentication object
 	protected String determineTargetUrl(Authentication authentication) {

@@ -71,11 +71,19 @@
 								</div>
 
 								<div class="col-lg-12 loginbttm">
-									<div class="col-lg-8 login-btm login-text text-danger"
+									
+									<!-- <div class="col-lg-8 login-btm login-text text-danger"
 										th:if="${param.error}">
-										<!-- Error Message -->
+										Error Message
 										Invalid user Name or password !!
+									</div> -->
+									
+									<div th:if="${param.error}">
+										<p class="text-white text-center">
+											<b>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</b>
+										</p>
 									</div>
+								
 									<div class="col-lg-8 login-btm login-text text-success"
 										th:if="${param.logout}">
 										<!-- Error Message -->

@@ -16,10 +16,7 @@
 				<div class="hr"></div>
 				<div class="login-form">
 				 <form action="#" th:action="@{/saveuser}" th:object="${user}" method="post">
-					<input type="hidden" th:field="*{userId}" />
-					<input type="hidden" th:field="*{status}" />
-					<input type="hidden" th:field="*{isLocked}" />
-					<input type="hidden" th:field="*{unsuccessfulEntry}" />
+					
 					
 					<div class="row row-cols-3">
 						<div class="group col">

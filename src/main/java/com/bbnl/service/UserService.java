@@ -1,10 +1,12 @@
 package com.bbnl.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bbnl.entity.PasswordResetToken;
 import com.bbnl.entity.User;
@@ -16,12 +18,23 @@ import com.bbnl.repository.PasswordResetTokenRepository;
 import com.bbnl.repository.VerificationTokenRepository;
 
 @Service
+@Transactional
 public class UserService implements IUserService {
+//================================================================================	
+	public static final int MAX_FAILED_ATTEMPT = 3;
+	public static final long LOCK_TIME_DURATION = 2 * 60 * 1000;
+//=================================================================================	
 	
-	@Autowired
 	private UserRepository repo;
 	
-	 @Autowired
+	
+	
+	public UserService(UserRepository repo) {
+
+		this.repo = repo;
+	}
+
+	@Autowired
 	    private PasswordResetTokenRepository passwordTokenRepository;
 	
 	 @Autowired
@@ -50,7 +63,7 @@ public class UserService implements IUserService {
 	@Override
 	public User findUserByEmail(String email) {
 		
-		System.out.println("override"+email);
+		System.out.println("override "+ email);
 		return repo.findByEmail(email);
 	}
 
@@ -115,4 +128,41 @@ public class UserService implements IUserService {
 	 * System.out.println("token at override"+token); return
 	 * repo.findByToken(token); }
 	 */
+//===============================================================================================================================
+	
+	public void increaseFailedAttempt(User user) {
+		long newUnsuccessfulAttempt = user.getUnsuccessfulAttempt() + 1;
+		repo.updateUnsuccessfulAttempt(newUnsuccessfulAttempt, user.getEmail());
+	}
+
+	public void lock(User user) {
+		user.setAccountNonLocked(false);
+		user.setLockTime(new Date());
+		user.setStatus(false);
+		repo.save(user);
+	}
+	
+	public boolean unlock(User user) {
+		long lockTimeInMillisec = user.getLockTime().getTime();
+		long currentTimeInMillisec = System.currentTimeMillis();
+		
+		if(lockTimeInMillisec + LOCK_TIME_DURATION < currentTimeInMillisec) {
+			user.setAccountNonLocked(true);
+			user.setLockTime(null);
+			user.setUnsuccessfulAttempt(0);
+			user.setStatus(true);
+			repo.save(user);
+			return true;
+		}
+		return false;
+		
+	}
+
+	public void resetUnsuccessfulAttempts(String email) {
+		repo.updateUnsuccessfulAttempt(0, email);
+//		User user = repo.findByEmail(email);
+//		user.setUnsuccessfulAttempt(0);
+//		return repo.save(user);
+		
+	}
 }

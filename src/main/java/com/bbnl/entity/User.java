@@ -1,5 +1,7 @@
 package com.bbnl.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,31 +40,29 @@ public class User {
 	private String address;
 	@Column(nullable = false, length = 100)
 	private String city;
-	@Column(length = 1)
-	@ColumnDefault("0")
-	private byte status;
+	private boolean status;
 	@Column(name = "mobile_number")
 	private Long mobileNumber;
-	@Column(name = "is_locked")
-	@ColumnDefault("false")
-	private boolean isLocked;
-	@Column(name = "unsuccessful_entry")
-	@ColumnDefault("0")
-	private int unsuccessfulEntry;
-	@Column(name = "enabled")
-	private boolean enabled;
-
+	
+	@Column(name = "account_non_locked")
+	private boolean accountNonLocked = true;
+	
+	@Column(name = "unsuccessful_attempt")
+	private long unsuccessfulAttempt;
+	
+	@Column(name = "lock_time")
+	private Date lockTime;
+	
 	 public User() 
 	  {
 		  super(); 
-		  this.enabled = false;
-		  }
-
-	public User(String userId, String password, String role, String secQuestion, String secAnswer, String firstName,
-			String middleName, String lastName, String email, String address, String city, byte status,
-			Long mobileNumber, boolean isLocked, int unsuccessfulEntry) {
+		  this.status = false;
+	  }
+	
+	public User(String password, String role, String secQuestion, String secAnswer, String firstName, String middleName,
+			String lastName, String email, String address, String city, boolean status, Long mobileNumber,
+			boolean accountNonLocked, long unsuccessfulAttempt, Date lockTime) {
 		super();
-		this.userId = userId;
 		this.password = password;
 		this.role = role;
 		this.secQuestion = secQuestion;
@@ -75,8 +75,9 @@ public class User {
 		this.city = city;
 		this.status = status;
 		this.mobileNumber = mobileNumber;
-		this.isLocked = isLocked;
-		this.unsuccessfulEntry = unsuccessfulEntry;
+		this.accountNonLocked = accountNonLocked;
+		this.unsuccessfulAttempt = unsuccessfulAttempt;
+		this.lockTime = lockTime;
 	}
 
 	public String getUserId() {
@@ -167,13 +168,6 @@ public class User {
 		this.city = city;
 	}
 
-	public byte getStatus() {
-		return status;
-	}
-
-	public void setStatus(byte status) {
-		this.status = status;
-	}
 
 	public Long getMobileNumber() {
 		return mobileNumber;
@@ -183,27 +177,36 @@ public class User {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public boolean getIsLocked() {
-		return isLocked;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setIsLocked(boolean isLocked) {
-		this.isLocked = isLocked;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
-	public int getUnsuccessfulEntry() {
-		return unsuccessfulEntry;
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
 	}
 
-	public void setUnsuccessfulEntry(int unsuccessfulEntry) {
-		this.unsuccessfulEntry = unsuccessfulEntry;
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
 	}
 
-	public boolean getEnabled() {
-		return enabled;
+	public long getUnsuccessfulAttempt() {
+		return unsuccessfulAttempt;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setUnsuccessfulAttempt(long unsuccessfulAttempt) {
+		this.unsuccessfulAttempt = unsuccessfulAttempt;
 	}
+
+	public Date getLockTime() {
+		return lockTime;
+	}
+
+	public void setLockTime(Date lockTime) {
+		this.lockTime = lockTime;
+	}
+	
 }
