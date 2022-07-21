@@ -1,11 +1,37 @@
 @charset "ISO-8859-1";
 
-body{
+body {
 	background-color: gray;
 }
 
-.cc{
-	background-color: green;
-	border: 2px solid;
-	width: 50%;
+.cc {
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 5px; padding : 5px;
+	/*width: 100%; */
+	
+	
+}
+
+.red {
+  color: red;
+  
+  
+}
+
+.s1{
+	margin-top:0px;
+	position:relative;
+}
+
+
+.navbar-custom {
+  height: 100px;
+  margin-top: 0px
+}
+
+too {
+    width: 130px;
+    padding: 0 30px 0 10px;
+    text-align: center;
 }
