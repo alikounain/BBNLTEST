@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Service provider Information </title>
+<link rel = "stylesheet" type = "text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" > 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+</head>
+<body>
+
+<div align="center">
+	<h1 class="text-center text-primary"><i class="fa fa-car" style="font-size:60px;color:blue;">Service provider Details</i></h1>
+	
+	<table class="table table-striped table-responsive" border="1" cellpadding="10">
+		<thead>
+		<tr>
+		<th>Service Provider Id</th>
+		<th>Service Provider Name</th>
+		<th>Service Provider type</th>
+		<th>Authorized Signatory</th>
+		<th>Signatory adhaar No</th>
+		<th>Pan</th>
+		<th>License No</th>
+		<th>tan</th>
+		<th>gst</th>
+		<th>Service State</th>
+		<th>Service District</th>
+		<th>Service Block</th>
+		<th>Address 1</th>
+		<th>Address 2</th>
+		<th>state</th>
+		<th>district</th>
+		<th>email</th>
+		<th>mobile no</th>
+		</tr>
+		</thead>
+	<tbody>
+		<tr th:each="ServiceProvider : ${listServiceProvider}">
+		<td th:text="${ServiceProvider.spId}">Service Provider ID</td>
+		<td th:text="${ServiceProvider.spName}">Service Provider Name</td>
+		<td th:text="${ServiceProvider.serviceType}">Service Provider Type</td>
+		<td th:text="${ServiceProvider.authorizedSignatory}">Authorized Signatory</td>
+		<td th:text="${ServiceProvider.signatoryAadharNo}">Signatory Adhaar Number</td>
+		<td th:text="${ServiceProvider.pan}">Pan Number</td>
+		<td th:text="${ServiceProvider.licenseNo}">Licence Number</td>
+		<td th:text="${ServiceProvider.tan}">Tan Number</td>
+		<td th:text="${ServiceProvider.gst}">GST Number</td>
+		<td th:text="${ServiceProvider.serviceState}">Service State</td>
+		<td th:text="${ServiceProvider.serviceDistrict}">Service District</td>
+		<td th:text="${ServiceProvider.serviceBlock}">Service Block</td>
+		<td th:text="${ServiceProvider.addressLine1}"> Address</td>
+		<td th:text="${ServiceProvider.addressLine2}"> Address</td>
+		<td th:text="${ServiceProvider.state}">State</td>
+		<td th:text="${ServiceProvider.emailId}">Email Id</td>
+		<td th:text="${ServiceProvider.mobileNo}">Mobile Number</td>
+		
+	</tbody>
+		
+	</table>
+</div>
+
+</body>
+</html>

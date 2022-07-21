@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>Customer Dashboard</title>
+</head>
+<body>
+	<h1>Welcome to Customer page <span sec:authentication="principal.username"></span></h1>
+	<h1> UserName <span th:text="${user.firstName+' '+user.lastName}"></span></h1>
+	<br /> <a class="btn btn-primary" th:href="@{/addServiceProvider}">Sign In</a>
+	<a href="/logout">logout</a>
+	
+</body>
+</html>

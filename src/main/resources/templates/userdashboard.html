@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+<link rel = "stylesheet" type = "text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div align="center">
+	<h1>Welcome to User page</h1>
+	
+	<br /> <a class="btn btn-primary" th:href="@{/ServiceProviderList}">Show Service Provider List</a>
+	<br />
+	<br />
+	<br /> <a class="btn btn-primary" th:href="@{/saveServiceProvider}">Add Service Provider</a>
+	<br />
+	<br />
+	<a class="btn btn-primary" href="/logout">logout</a>
+	
+	</div>
+</body>
+</html>
