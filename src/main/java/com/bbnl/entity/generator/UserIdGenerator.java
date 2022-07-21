@@ -25,7 +25,7 @@ public class UserIdGenerator implements IdentifierGenerator{
 				else {
 					String userstr = rs.getString(1).substring(3);
 					int usrint = Integer.parseInt(userstr)+1;
-					String generatedId = prefix + Integer.toString(usrint);
+					String generatedId = prefix + new Integer(usrint).toString();
 					return generatedId;
 				}
 			}

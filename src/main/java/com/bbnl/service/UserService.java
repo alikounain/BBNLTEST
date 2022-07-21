@@ -11,6 +11,7 @@ import com.bbnl.entity.User;
 import com.bbnl.entity.VerificationToken;
 import com.bbnl.exception.EmailExistsException;
 import com.bbnl.repository.UserRepository;
+import com.bbnl.service.IUserService;
 import com.bbnl.repository.PasswordResetTokenRepository;
 import com.bbnl.repository.VerificationTokenRepository;
 
