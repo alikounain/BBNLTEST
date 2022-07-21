@@ -15,78 +15,137 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 	crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="css/addser.css">
+<link rel="stylesheet" type="text/css" href="css/addser.css">
 
 </head>
-<body >
-	<div class="container mt-5 cc" align="center">
-		<h1>Add New Service Provider</h1>
+<body>
+<!-- As a heading -->
+<nav class="navbar bg-primary navbar-custom">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white s1">Registration Form</span>
+  </div>
+</nav>
+	<div class="container mt-5 cc">
+		<h5 class="#6610f2 fw-semibold">Service Provider Details</h5>
 		<br />
-		<form action="#" th:action="@{/save}" th:object="${serviceProvider}"
-			method="post">
-			<table border="0" cellpadding="10">
+		<form class="row g-3" action="#" th:action="@{/save}"
+			th:object="${serviceProvider}" method="post">
+			<div class="col-md-6">
+				<label for="serviceProviderName" class="form-label fw-bold"> Name of
+					the Service Provider <span class="red">*</span></label> <input type="text"
+					placeholder="Name of the Service Provider" class="form-control"
+					id="serviceProviderName" th:field="*{spName}">
+			</div>
+			<div class="col-md-6">
+				<label for="serviceProviderName" class="form-label fw-bold"> Type of
+					Service Provider <span class="red">*</span></label> <select class="form-select"
+					aria-label="Default select example" name="stype"
+					id="serviceProviderName">
+					<option selected>--Select--</option>
+					<option th:each="serviceType : ${listServiceType}"
+						th:value="${serviceType.serviceId}"
+						th:text="${serviceType.serviceNname}"></option>
 
-				<!-- <div class="row mb-3">
-					<label for="text" class="col-sm-2 col-form-label">Service Provider Name:</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="text" th:field="*{spName}">
-					</div>
-				</div> -->
-				<tr>
+				</select>
+			</div>
+
+			<div class="col-md-4">
+				<label for="aSignatory" class="form-label fw-bold c1">Name of Authorized Signatory<span class="red">*</span></label> <input
+					type="text" class="form-control" id="aSignatory" th:field="*{authorizedSignatory}"
+					placeholder="Name of Authorized Signatory">
+			</div>
+			<div class="col-md-4">
+				<label for="aadharOfSignatory" class="form-label fw-bold">Aadhar Number of Authorized Signatory <span class="red">*</span></label> <input
+					type="number" class="form-control" id="aadharOfSignatory" th:field="*{signatoryAadharNo}"
+					placeholder="Name of Authorized Signatory">
+			</div>
+			<div class="col-md-4">
+				<label for="pan" class="form-label fw-bold">PAN <span class="red">*</span></label> <input
+					type="text" class="form-control" id="pan" th:field="*{pan}"
+					placeholder="PAN">
+			</div>
+			
+			
+			<div class="col-md-4">
+				<label for="licenceNo" class="form-label fw-bold">Authorized Licence Number<span class="red">*</span></label> <input
+					type="number" class="form-control" id="licenceNo" th:field="*{licenseNo}"
+					placeholder="Authorized Licence Number">
+			</div>
+			<div class="col-md-4">
+				<label for="tan" class="form-label fw-bold">TAN <span class="red">*</span></label> <input
+					type="number" class="form-control" id="tan" th:field="*{tan}"
+					placeholder="TAN">
+			</div>
+			<div class="col-md-4">
+				<label for="gst" class="form-label fw-bold">GSTIN/UTS NO. <span class="red">*</span></label> <input
+					type="text" class="form-control" id="gst" th:field="*{gst}"
+					placeholder="GSTIN">
+			</div>
+			<!-- <table border="0" cellpadding="10"> -->
+
+
+				<!-- <tr>
 					<td>Service Provider Name:</td>
-					<td><input type="text" class="form-control" th:field="*{spName}" />
+					<td><input type="text" class="form-control"
+						th:field="*{spName}" />
 					<td>
-				</tr>
+				</tr> -->
 
-				<tr>
+				<!-- <tr>
 					<td>Service Provider Type:</td>
-					<!-- <td><input type="text" th:field="*{serviceType}" /><td> -->
+					<td><input type="text" th:field="*{serviceType}" /><td>
 
-					<td><select class="form-select"
-						aria-label="Default select example" name="stype" id="stype">
-							<option th:each="serviceType : ${listServiceType}"
-								th:value="${serviceType.serviceId}"
-								th:text="${serviceType.serviceNname}"></option>
+					<select class="form-select" aria-label="Default select example"
+						name="stype" id="stype">
+						<option th:each="serviceType : ${listServiceType}"
+							th:value="${serviceType.serviceId}"
+							th:text="${serviceType.serviceNname}"></option>
 
-					</select></td>
-				</tr>
+					</select>
+				</tr> -->
 
-				<tr>
+				<!-- <tr>
 					<td>Authorized Signatory:</td>
-					<td><input type="text" class="form-control" th:field="*{authorizedSignatory}" />
+					<td><input type="text" class="form-control"
+						th:field="*{authorizedSignatory}" />
 					<td>
 				</tr>
 
 				<tr>
 					<td>Signatory Aadhar Number :</td>
-					<td><input type="number" class="form-control" th:field="*{signatoryAadharNo}" />
+					<td><input type="number" class="form-control"
+						th:field="*{signatoryAadharNo}" />
 					<td>
 				</tr>
-				
+
 				<tr>
 					<td>Pan:</td>
-					<td><input type="number" class="form-control" th:field="*{pan}" />
+					<td><input type="number" class="form-control"
+						th:field="*{pan}" />
 					<td>
-				</tr>
-				
-				<tr>
+				</tr> -->
+
+				<!-- <tr>
 					<td>Licence Number:</td>
-					<td><input type="number" class="form-control" th:field="*{licenseNo}" />
+					<td><input type="number" class="form-control"
+						th:field="*{licenseNo}" />
 					<td>
 				</tr>
-				
+
 				<tr>
 					<td>tan:</td>
-					<td><input type="number" class="form-control" th:field="*{tan}" />
+					<td><input type="number" class="form-control"
+						th:field="*{tan}" />
 					<td>
 				</tr>
-				
+
 				<tr>
 					<td>GST:</td>
-					<td><input type="number" class="form-control" th:field="*{gst}" />
+					<td><input type="number" class="form-control"
+						th:field="*{gst}" />
 					<td>
-				</tr>
-			</table>
+				</tr> -->
+			<!-- </table> -->
 		</form>
 	</div>
 
