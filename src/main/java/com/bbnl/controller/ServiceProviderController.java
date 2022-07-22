@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bbnl.entity.ServiceProvider;
@@ -44,5 +45,13 @@ public class ServiceProviderController {
 		return "addServiceProvider";
 	
 	}
+	    
+	    
+	    @PostMapping("/serviceprovider/save")
+	    public String saveServiceProviderDetails(ServiceProvider serviceProvider) {
+	    	service.save(serviceProvider);
+	    	
+	    	return "redirect:/user";
+	    }
 
 }

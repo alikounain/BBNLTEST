@@ -22,29 +22,31 @@
 <!-- As a heading -->
 <nav class="navbar bg-primary navbar-custom">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1 text-white s1">Registration Form</span>
+    <span class="navbar-brand mb-5 h1 text-white s1">Registration Form</span>
   </div>
 </nav>
-	<div class="container mt-5 cc">
+	<div class="container-fluid cc cc2">
+		
 		<h5 class="#6610f2 fw-semibold">Service Provider Details</h5>
 		<br />
-		<form class="row g-3" action="#" th:action="@{/save}"
+		<form class="row g-3" action="#" th:action="@{/serviceprovider/save}"
 			th:object="${serviceProvider}" method="post">
 			<div class="col-md-6">
 				<label for="serviceProviderName" class="form-label fw-bold"> Name of
-					the Service Provider <span class="red">*</span></label> <input type="text"
+					the Service Provider<span class="red">*</span></label> <input type="text"
 					placeholder="Name of the Service Provider" class="form-control"
 					id="serviceProviderName" th:field="*{spName}">
 			</div>
 			<div class="col-md-6">
 				<label for="serviceProviderName" class="form-label fw-bold"> Type of
-					Service Provider <span class="red">*</span></label> <select class="form-select"
+					Service Provider<span class="red">*</span></label>
+					<select class="form-select"
 					aria-label="Default select example" name="stype"
-					id="serviceProviderName">
-					<option selected>--Select--</option>
-					<option th:each="serviceType : ${listServiceType}"
-						th:value="${serviceType.serviceId}"
-						th:text="${serviceType.serviceNname}"></option>
+					id="serviceProviderName" th:field="*{serviceType}">
+					<option disabled="disabled" value="0">--select--</option>
+					<option th:each="serType : ${listServiceType}"
+						th:value="${serType.serviceId}"
+						th:text="${serType.serviceNname}"></option>
 
 				</select>
 			</div>
@@ -55,99 +57,38 @@
 					placeholder="Name of Authorized Signatory">
 			</div>
 			<div class="col-md-4">
-				<label for="aadharOfSignatory" class="form-label fw-bold">Aadhar Number of Authorized Signatory <span class="red">*</span></label> <input
-					type="number" class="form-control" id="aadharOfSignatory" th:field="*{signatoryAadharNo}"
+				<label for="aadharOfSignatory" class="form-label fw-bold">Aadhar Number of Authorized Signatory<span class="red">*</span></label> <input
+					type="text" class="form-control" id="aadharOfSignatory" th:field="*{signatoryAadharNo}"
 					placeholder="Name of Authorized Signatory">
 			</div>
 			<div class="col-md-4">
-				<label for="pan" class="form-label fw-bold">PAN <span class="red">*</span></label> <input
+				<label for="pan" class="form-label fw-bold">PAN<span class="red">*</span></label> <input
 					type="text" class="form-control" id="pan" th:field="*{pan}"
 					placeholder="PAN">
 			</div>
 			
 			
 			<div class="col-md-4">
-				<label for="licenceNo" class="form-label fw-bold">Authorized Licence Number<span class="red">*</span></label> <input
-					type="number" class="form-control" id="licenceNo" th:field="*{licenseNo}"
+				<label for="licenceNo" class="form-label fw-bold">Authorized Licence No</label> <input
+					type="text" class="form-control" id="licenceNo" th:field="*{licenseNo}"
 					placeholder="Authorized Licence Number">
 			</div>
 			<div class="col-md-4">
-				<label for="tan" class="form-label fw-bold">TAN <span class="red">*</span></label> <input
-					type="number" class="form-control" id="tan" th:field="*{tan}"
+				<label for="tan" class="form-label fw-bold">TAN</label> <input
+					type="text" class="form-control" id="tan" th:field="*{tan}"
 					placeholder="TAN">
 			</div>
 			<div class="col-md-4">
-				<label for="gst" class="form-label fw-bold">GSTIN/UTS NO. <span class="red">*</span></label> <input
+				<label for="gst" class="form-label fw-bold">GSTIN/UTS NO.</label> <input
 					type="text" class="form-control" id="gst" th:field="*{gst}"
 					placeholder="GSTIN">
 			</div>
-			<!-- <table border="0" cellpadding="10"> -->
-
-
-				<!-- <tr>
-					<td>Service Provider Name:</td>
-					<td><input type="text" class="form-control"
-						th:field="*{spName}" />
-					<td>
-				</tr> -->
-
-				<!-- <tr>
-					<td>Service Provider Type:</td>
-					<td><input type="text" th:field="*{serviceType}" /><td>
-
-					<select class="form-select" aria-label="Default select example"
-						name="stype" id="stype">
-						<option th:each="serviceType : ${listServiceType}"
-							th:value="${serviceType.serviceId}"
-							th:text="${serviceType.serviceNname}"></option>
-
-					</select>
-				</tr> -->
-
-				<!-- <tr>
-					<td>Authorized Signatory:</td>
-					<td><input type="text" class="form-control"
-						th:field="*{authorizedSignatory}" />
-					<td>
-				</tr>
-
-				<tr>
-					<td>Signatory Aadhar Number :</td>
-					<td><input type="number" class="form-control"
-						th:field="*{signatoryAadharNo}" />
-					<td>
-				</tr>
-
-				<tr>
-					<td>Pan:</td>
-					<td><input type="number" class="form-control"
-						th:field="*{pan}" />
-					<td>
-				</tr> -->
-
-				<!-- <tr>
-					<td>Licence Number:</td>
-					<td><input type="number" class="form-control"
-						th:field="*{licenseNo}" />
-					<td>
-				</tr>
-
-				<tr>
-					<td>tan:</td>
-					<td><input type="number" class="form-control"
-						th:field="*{tan}" />
-					<td>
-				</tr>
-
-				<tr>
-					<td>GST:</td>
-					<td><input type="number" class="form-control"
-						th:field="*{gst}" />
-					<td>
-				</tr> -->
-			<!-- </table> -->
+			<div class="group submit ">
+						<input type="submit" class="button" value="Save">
+					</div>
 		</form>
-	</div>
+		</div>
+	
 
 </body>
 </html>
