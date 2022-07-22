@@ -32,7 +32,7 @@ public class Demand {
 	@Column(name = "demand_user_id")
 	private String demandUserId;
 	@Column(name = "demand_date")
-	private Date demandDate;
+	private Date demandDate = new Date(System.currentTimeMillis());
 	
 	public Demand() {
 		super();

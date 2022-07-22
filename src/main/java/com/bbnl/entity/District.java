@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +22,7 @@ public class District {
 	@Column(name = "district_name")
 	private String districtName;
 	
-	@OneToOne(targetEntity = State.class,fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = State.class,fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false,name = "state_id")
 	private State state;
 
