@@ -1,5 +1,7 @@
 package com.bbnl.entity;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,7 +58,7 @@ public class ServiceProvider {
 	private String addressLine1;
 
 	@Column(name = "address_line2", length = 250)
-	private String address_line2;
+	private String addressLine2;
 
 	@Column(name = "state")
 	private int state;
@@ -74,11 +76,12 @@ public class ServiceProvider {
 		super();
 	}
 
-	public ServiceProvider(String spName, int serviceType, String authorizedSignatory, String signatoryAadharNo,
-			String pan, String licenseNo, String tan, String gst, boolean isRequired, int serviceState,
-			int serviceDistrict, int serviceBlock, String addressLine1, String address_line2, int state, int district,
-			String emailId, String mobileNo) {
+	public ServiceProvider(Long spId, String spName, int serviceType, String authorizedSignatory,
+			String signatoryAadharNo, String pan, String licenseNo, String tan, String gst, boolean isRequired,
+			int serviceState, int serviceDistrict, int serviceBlock, String addressLine1, String addressLine2,
+			int state, int district, String emailId, String mobileNo) {
 		super();
+		this.spId = spId;
 		this.spName = spName;
 		this.serviceType = serviceType;
 		this.authorizedSignatory = authorizedSignatory;
@@ -92,11 +95,19 @@ public class ServiceProvider {
 		this.serviceDistrict = serviceDistrict;
 		this.serviceBlock = serviceBlock;
 		this.addressLine1 = addressLine1;
-		this.address_line2 = address_line2;
+		this.addressLine2 = addressLine2;
 		this.state = state;
 		this.district = district;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
+	}
+
+	public Long getSpId() {
+		return spId;
+	}
+
+	public void setSpId(Long spId) {
+		this.spId = spId;
 	}
 
 	public String getSpName() {
@@ -203,12 +214,12 @@ public class ServiceProvider {
 		this.addressLine1 = addressLine1;
 	}
 
-	public String getAddress_line2() {
-		return address_line2;
+	public String getAddressLine2() {
+		return addressLine2;
 	}
 
-	public void setAddress_line2(String address_line2) {
-		this.address_line2 = address_line2;
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
 	}
 
 	public int getState() {
@@ -244,38 +255,10 @@ public class ServiceProvider {
 	}
 
 	@Override
-	public String toString() {
-		return "ServiceProvider [spId=" + spId + ", spName=" + spName + ", serviceType=" + serviceType
-				+ ", authorizedSignatory=" + authorizedSignatory + ", signatoryAadharNo=" + signatoryAadharNo + ", pan="
-				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", isRequired=" + isRequired
-				+ ", serviceState=" + serviceState + ", serviceDistrict=" + serviceDistrict + ", serviceBlock="
-				+ serviceBlock + ", addressLine1=" + addressLine1 + ", address_line2=" + address_line2 + ", state="
-				+ state + ", district=" + district + ", emailId=" + emailId + ", mobileNo=" + mobileNo + "]";
-	}
-
-	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((addressLine1 == null) ? 0 : addressLine1.hashCode());
-		result = prime * result + ((address_line2 == null) ? 0 : address_line2.hashCode());
-		result = prime * result + ((authorizedSignatory == null) ? 0 : authorizedSignatory.hashCode());
-		result = prime * result + district;
-		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
-		result = prime * result + ((gst == null) ? 0 : gst.hashCode());
-		result = prime * result + (isRequired ? 1231 : 1237);
-		result = prime * result + ((licenseNo == null) ? 0 : licenseNo.hashCode());
-		result = prime * result + ((mobileNo == null) ? 0 : mobileNo.hashCode());
-		result = prime * result + ((pan == null) ? 0 : pan.hashCode());
-		result = prime * result + serviceBlock;
-		result = prime * result + serviceDistrict;
-		result = prime * result + serviceState;
-		result = prime * result + serviceType;
-		result = prime * result + ((signatoryAadharNo == null) ? 0 : signatoryAadharNo.hashCode());
-		result = prime * result + ((spName == null) ? 0 : spName.hashCode());
-		result = prime * result + state;
-		result = prime * result + ((tan == null) ? 0 : tan.hashCode());
-		return result;
+		return Objects.hash(addressLine1, addressLine2, authorizedSignatory, district, emailId, gst, isRequired,
+				licenseNo, mobileNo, pan, serviceBlock, serviceDistrict, serviceState, serviceType, signatoryAadharNo,
+				spId, spName, state, tan);
 	}
 
 	@Override
@@ -287,76 +270,27 @@ public class ServiceProvider {
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceProvider other = (ServiceProvider) obj;
-		if (addressLine1 == null) {
-			if (other.addressLine1 != null)
-				return false;
-		} else if (!addressLine1.equals(other.addressLine1))
-			return false;
-		if (address_line2 == null) {
-			if (other.address_line2 != null)
-				return false;
-		} else if (!address_line2.equals(other.address_line2))
-			return false;
-		if (authorizedSignatory == null) {
-			if (other.authorizedSignatory != null)
-				return false;
-		} else if (!authorizedSignatory.equals(other.authorizedSignatory))
-			return false;
-		if (district != other.district)
-			return false;
-		if (emailId == null) {
-			if (other.emailId != null)
-				return false;
-		} else if (!emailId.equals(other.emailId))
-			return false;
-		if (gst == null) {
-			if (other.gst != null)
-				return false;
-		} else if (!gst.equals(other.gst))
-			return false;
-		if (isRequired != other.isRequired)
-			return false;
-		if (licenseNo == null) {
-			if (other.licenseNo != null)
-				return false;
-		} else if (!licenseNo.equals(other.licenseNo))
-			return false;
-		if (mobileNo == null) {
-			if (other.mobileNo != null)
-				return false;
-		} else if (!mobileNo.equals(other.mobileNo))
-			return false;
-		if (pan == null) {
-			if (other.pan != null)
-				return false;
-		} else if (!pan.equals(other.pan))
-			return false;
-		if (serviceBlock != other.serviceBlock)
-			return false;
-		if (serviceDistrict != other.serviceDistrict)
-			return false;
-		if (serviceState != other.serviceState)
-			return false;
-		if (serviceType != other.serviceType)
-			return false;
-		if (signatoryAadharNo == null) {
-			if (other.signatoryAadharNo != null)
-				return false;
-		} else if (!signatoryAadharNo.equals(other.signatoryAadharNo))
-			return false;
-		if (spName == null) {
-			if (other.spName != null)
-				return false;
-		} else if (!spName.equals(other.spName))
-			return false;
-		if (state != other.state)
-			return false;
-		if (tan == null) {
-			if (other.tan != null)
-				return false;
-		} else if (!tan.equals(other.tan))
-			return false;
-		return true;
+		return Objects.equals(addressLine1, other.addressLine1) && Objects.equals(addressLine2, other.addressLine2)
+				&& Objects.equals(authorizedSignatory, other.authorizedSignatory) && district == other.district
+				&& Objects.equals(emailId, other.emailId) && Objects.equals(gst, other.gst)
+				&& isRequired == other.isRequired && Objects.equals(licenseNo, other.licenseNo)
+				&& Objects.equals(mobileNo, other.mobileNo) && Objects.equals(pan, other.pan)
+				&& serviceBlock == other.serviceBlock && serviceDistrict == other.serviceDistrict
+				&& serviceState == other.serviceState && serviceType == other.serviceType
+				&& Objects.equals(signatoryAadharNo, other.signatoryAadharNo) && Objects.equals(spId, other.spId)
+				&& Objects.equals(spName, other.spName) && state == other.state && Objects.equals(tan, other.tan);
 	}
+
+	@Override
+	public String toString() {
+		return "ServiceProvider [spId=" + spId + ", spName=" + spName + ", serviceType=" + serviceType
+				+ ", authorizedSignatory=" + authorizedSignatory + ", signatoryAadharNo=" + signatoryAadharNo + ", pan="
+				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", isRequired=" + isRequired
+				+ ", serviceState=" + serviceState + ", serviceDistrict=" + serviceDistrict + ", serviceBlock="
+				+ serviceBlock + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", state="
+				+ state + ", district=" + district + ", emailId=" + emailId + ", mobileNo=" + mobileNo + "]";
+	}
+
+	
 
 }

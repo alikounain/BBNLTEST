@@ -7,11 +7,17 @@ body {
 .cc {
 	background-color: white;
 	border: 2px solid white;
-	border-radius: 5px; padding : 5px;
+	border-radius: 5px;
 	/*width: 100%; */
-	
-	
+	position:absolute;
+	top: 50px;
+	width:98.5%;
+	margin-left:10px;
+	padding: 30px;
 }
+
+
+
 
 .red {
   color: red;
@@ -19,10 +25,6 @@ body {
   
 }
 
-.s1{
-	margin-top:0px;
-	position:relative;
-}
 
 
 .navbar-custom {
@@ -30,8 +32,3 @@ body {
   margin-top: 0px
 }
 
-too {
-    width: 130px;
-    padding: 0 30px 0 10px;
-    text-align: center;
-}

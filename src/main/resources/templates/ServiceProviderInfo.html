@@ -36,24 +36,25 @@
 		</tr>
 		</thead>
 	<tbody>
-		<tr th:each="ServiceProvider : ${listServiceProvider}">
-		<td th:text="${ServiceProvider.spId}">Service Provider ID</td>
-		<td th:text="${ServiceProvider.spName}">Service Provider Name</td>
-		<td th:text="${ServiceProvider.serviceType}">Service Provider Type</td>
-		<td th:text="${ServiceProvider.authorizedSignatory}">Authorized Signatory</td>
-		<td th:text="${ServiceProvider.signatoryAadharNo}">Signatory Adhaar Number</td>
-		<td th:text="${ServiceProvider.pan}">Pan Number</td>
-		<td th:text="${ServiceProvider.licenseNo}">Licence Number</td>
-		<td th:text="${ServiceProvider.tan}">Tan Number</td>
-		<td th:text="${ServiceProvider.gst}">GST Number</td>
-		<td th:text="${ServiceProvider.serviceState}">Service State</td>
-		<td th:text="${ServiceProvider.serviceDistrict}">Service District</td>
-		<td th:text="${ServiceProvider.serviceBlock}">Service Block</td>
-		<td th:text="${ServiceProvider.addressLine1}"> Address</td>
-		<td th:text="${ServiceProvider.addressLine2}"> Address</td>
-		<td th:text="${ServiceProvider.state}">State</td>
-		<td th:text="${ServiceProvider.emailId}">Email Id</td>
-		<td th:text="${ServiceProvider.mobileNo}">Mobile Number</td>
+		<tr th:each="sProvider : ${listServiceProvider}">
+		<td th:text="${sProvider.spId}">Service Provider ID</td>
+		<td th:text="${sProvider.spName}">Service Provider Name</td>
+		<td th:text="${sProvider.serviceType}">Service Provider Type</td>
+		<td th:text="${sProvider.authorizedSignatory}">Authorized Signatory</td>
+		<td th:text="${sProvider.signatoryAadharNo}">Signatory Adhaar Number</td>
+		<td th:text="${sProvider.pan}">Pan Number</td>
+		<td th:text="${sProvider.licenseNo}">Licence Number</td>
+		<td th:text="${sProvider.tan}">Tan Number</td>
+		<td th:text="${sProvider.gst}">GST Number</td>
+		<td th:text="${sProvider.serviceState}">Service State</td>
+		<td th:text="${sProvider.serviceDistrict}">Service District</td>
+		<td th:text="${sProvider.serviceBlock}">Service Block</td>
+		<td th:text="${sProvider.addressLine1}"> Address</td>
+		<td th:text="${sProvider.addressLine2}"> Address</td>
+		<td th:text="${sProvider.state}">State</td>
+		<td th:text="${sProvider.district}">District</td>
+		<td th:text="${sProvider.emailId}">Email Id</td>
+		<td th:text="${sProvider.mobileNo}">Mobile Number</td>
 		
 	</tbody>
 		
