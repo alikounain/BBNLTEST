@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bbnl.entity.Block;
 import com.bbnl.entity.Demand;
@@ -47,7 +49,12 @@ public class DemandController {
 	private GramPanchayatService gramPanchayatService;	
 	
 	@GetMapping("/connection")
-	public String connection() {
+	public String connection(Model model,Principal principal) {
+		String username = principal.getName();
+		User user = repo.getUserByUserId(username);
+		model.addAttribute("user",user);
+		List<Demand> listDemand = demandService.listAllDemand();
+		model.addAttribute("listDemand", listDemand);
 		return "connections";
 	}
 
@@ -80,4 +87,15 @@ public class DemandController {
 	 demandService.saveDemand(demand);
 	 return "redirect:/user/connection?success";
 	 }
+	
+	@RequestMapping("connection/edit/{id}")
+	public ModelAndView editConn(@PathVariable(name = "id") int id,Model model, Principal principal) {
+		String username = principal.getName();
+		User user = repo.getUserByUserId(username);
+		model.addAttribute("user",user);
+		ModelAndView mav = new ModelAndView("editConnection");
+		Demand demand = demandService.editDemand(id);
+		mav.addObject("demad", demand);		
+		return mav;
+	}
 }
