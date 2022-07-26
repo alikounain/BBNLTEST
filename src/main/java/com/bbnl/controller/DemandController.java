@@ -48,6 +48,7 @@ public class DemandController {
 	@Autowired
 	private GramPanchayatService gramPanchayatService;	
 	
+	//Showing all Connections details
 	@GetMapping("/connection")
 	public String connection(Model model,Principal principal) {
 		String username = principal.getName();
@@ -58,6 +59,7 @@ public class DemandController {
 		return "connections";
 	}
 
+	//Adding new Connection
 	@GetMapping("/connection/addconnection")
 	public String newConn(Model model,Principal principal) {
 		
@@ -82,12 +84,14 @@ public class DemandController {
 		return "newConnection";
 	}
 	
+	//saving a new connection
 	@RequestMapping(value = "/saveconn", method = RequestMethod.POST)
 	public String saveConn(@ModelAttribute("demand") Demand demand) {
 	 demandService.saveDemand(demand);
-	 return "redirect:/user/connection?success";
+	 return "redirect:connection?success";
 	 }
 	
+	//Edit connection
 	@RequestMapping("connection/edit/{id}")
 	public ModelAndView editConn(@PathVariable(name = "id") int id,Model model, Principal principal) {
 		String username = principal.getName();
@@ -95,7 +99,27 @@ public class DemandController {
 		model.addAttribute("user",user);
 		ModelAndView mav = new ModelAndView("editConnection");
 		Demand demand = demandService.editDemand(id);
-		mav.addObject("demad", demand);		
+		
+		List<State> liststate = stateService.listAllState();
+		model.addAttribute("liststate", liststate);
+		
+		List<District> listDistrict = districtService.listAllDistrict();
+		model.addAttribute("listDistrict", listDistrict);
+		
+		List<Block> lisBlock = blockService.listAllBlock();
+		model.addAttribute("lisBlock", lisBlock);
+		
+		List<GramPanchayat> listGramPanchayat = gramPanchayatService.listAllGramPanchayat();
+		model.addAttribute("listGramPanchayat", listGramPanchayat);
+		
+		mav.addObject("demand", demand);		
 		return mav;
+	}
+	
+	//Delete Connection
+	@RequestMapping("connection/delete/{id}")
+	public String deleteConn(@PathVariable(name = "id") int id) {
+		demandService.deleteDemand(id);
+		return "redirect:/user/connection?delete";
 	}
 }

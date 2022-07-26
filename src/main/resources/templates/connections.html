@@ -8,9 +8,26 @@
 	<body>
 		
 		<nav th:include="base3 :: navb3"></nav>
-		<!-- <a href="/user/connection/addconnection">Add new Connection</a> -->
-		<a th:href="@{connection/addconnection}">Add new Connection</a>
-		<div class="container d-flex justify-content-center">
+		
+		<div class="alert alert-success alert-dismissible fade show register-box text-center" role="alert"
+			style="position: absolute; margin-left: auto; margin-right: auto;
+			left: 0; right: 0; text-align: center; width: 15%;"
+			th:if="${param.success}"> Saved Successfully !!
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		
+		<div class="alert alert-warning alert-dismissible fade show register-box text-center" role="alert"
+			style="position: absolute; margin-left: auto; margin-right: auto;
+			left: 0; right: 0; text-align: center; width: 15%;"
+			th:if="${param.delete}"> Deleted Successfully !!
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		
+		<div class="container d-flex justify-content-center mt-5">
 			
 			
 			<table class="table table-bordered table-striped">			
@@ -25,27 +42,39 @@
 						<th>Gram Panchayats</th>
 						<th>Date</th>
 						<th>Status</th>
-						<th>Modify</th>
+						<th colspan="2">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="ld : ${listDemand}">
 						<td th:text="${ld.demandId}"/>
-						<td th:text="${ld.demandType}"/>
-						<td th:text="${ld.demandUserId}"/>
-						<td th:text="${ld.stateId}"/>
-						<td th:text="${ld.districtId}"/>
-						<td th:text="${ld.blockId}"/>
-						<td th:text="${ld.gpId}"/>
-						<td th:text="${ld.demandDate}"/>
-						<td th:text="${ld.status}"/>
+						<td th:switch="${ld.demandType}"> 
+							<span th:case="1">Single Customer</span>
+    						<span th:case="2">Bulk Customer (Manual)</span>
+    						<span th:case="3">Bulk Customer (Excel)</span>
+    						<span th:case="*">null</span>
+						</td>
+						<td th:text="${ld.user.userId}"/>
+						<td th:text="${ld.state.stateName}"/>
+						<td th:text="${ld.district.districtName}"/>
+						<td th:text="${ld.block.blockName}"/>
+						<td th:text="${ld.gp.gpName}"/>
+						<td th:text="${#dates.format(ld.demandDate, 'dd-MMM-yyyy')}"></td>
+						<td th:switch="${ld.status}">
+							<span th:case="1">Draft</span>
+    						<span th:case="2">Submitted</span>
+    						<span th:case="*">null</span>
+						</td>
 						<td><a th:href="@{'connection/edit/' + ${ld.demandId}}">Edit</a></td>
-						<td><a th:href="@{'/delete/' + ${ld.demandId}}">Delete</a></td>
+						<td><a th:href="@{'connection/delete/' + ${ld.demandId}}">Delete</a></td>
 					 </tr>
 				</tbody>
 			</table>	
 			
 	
+		</div>
+		<div class="text-center">
+		<a class="btn btn-primary" th:href="@{connection/addconnection}">Add new Connection</a>
 		</div>
 	</body>
 </html>

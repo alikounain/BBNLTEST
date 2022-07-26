@@ -24,7 +24,7 @@
 				
 				<div class="inputs">
 				
-					<input type="hidden" th:value="${user.userId}" th:attr="name='demandUserId'" />
+					<input type="hidden" th:value="${user.userId}" th:attr="name='user'" />
 					
 					<label>Demand Type</label>					
 					<select class="custom-select" th:field="*{demandType}">
@@ -34,7 +34,7 @@
 					</select>
 					
 					<label>State</label>
-					<select class="custom-select" th:field="*{stateId}">
+					<select class="custom-select" th:field="*{state}">
 						 <option th:each="liststate : ${liststate}"
 						 	th:value="${liststate.stateId}"
                             th:text="${liststate.stateName}">
@@ -42,7 +42,7 @@
 					</select>
 							
 					<label>District</label>
-					<select class="custom-select" th:field="*{districtId}">
+					<select class="custom-select" th:field="*{district}">
 						<option th:each="listDistrict : ${listDistrict}"
 						 	th:value="${listDistrict.districtId}"
                             th:text="${listDistrict.districtName}">
@@ -50,7 +50,7 @@
 					</select>
 					
 					<label>Block</label>
-					<select class="custom-select" th:field="*{blockId}">
+					<select class="custom-select" th:field="*{block}">
 						 <option th:each="lisBlock : ${lisBlock}"
 						 	th:value="${lisBlock.blockId}"
                             th:text="${lisBlock.blockName}">
@@ -58,7 +58,7 @@
 					</select>
 				
 					<label>GramPanchayat</label>
-					<select class="custom-select" th:field="*{gpId}">
+					<select class="custom-select" th:field="*{gp}">
 						 <option th:each="listGramPanchayat : ${listGramPanchayat}"
 						 	th:value="${listGramPanchayat.gpId}"
                             th:text="${listGramPanchayat.gpName}">
@@ -76,9 +76,13 @@
 						<input name="cecky" id="checky" value="1" type="checkbox" />
 						<label class="terms">I accept the terms of use</label>
 					</div>
-					<button type="submit" id="submit" >Add Connection</button>
+					<button type="submit" id="submit" class="mr-5">Add Connection</button>
+
 				</div>
-		
+				<div class="mt-3 mr-5 ml-5 d-flex justify-content-between">
+					<button class="btn btn-clr" type="reset">reset</button>
+					<a class="btn btn-clr" th:href="@{/user/connection}">Back</a>
+				</div>
 			</form>
 		</div>​
 	</body>

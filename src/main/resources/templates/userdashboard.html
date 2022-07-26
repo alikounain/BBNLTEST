@@ -9,7 +9,7 @@
 <body>
 	<section class="text-center mt-1">
 		<h1>Welcome, <span sec:authentication="principal.username"></span></h1>
-		<h3 > <a th:href="@{/user/connection}">Connection details</a> </h3>
+		<h3 > <a class="btn btn-primary" th:href="@{/user/connection}">Connection details</a> </h3>
 	</section>
 </body>
 </html>
