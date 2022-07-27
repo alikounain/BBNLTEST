@@ -1,12 +1,18 @@
 package com.bbnl.entity;
 
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,31 +22,39 @@ public class RegisteredDocuments {
 		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "sp_doc_id")
-	    private Integer spDocId;
+	    private Long spDocId;
+	  
+		@OneToOne(cascade = CascadeType.ALL)
+		@JoinColumn(name = "sp_id")
+	    private ServiceProvider serviceProvider;
 	     
-	    @Column(name = "sp_id")
-	    private String spId;
-	     
-	    @Column(name = "sp_doc_name")
+		@Column(name = "sp_doc_name")
 	    private String spDocName;
 
 		public RegisteredDocuments() {
-			super();
+			
 		}
 
-		public RegisteredDocuments(Integer spDocId, String spId, String spDocName) {
-			super();
-			this.spDocId = spDocId;
-			this.spId = spId;
+		public RegisteredDocuments(ServiceProvider serviceProvider, String spDocName) {
+			
+			this.serviceProvider = serviceProvider;
 			this.spDocName = spDocName;
 		}
 
-		public String getSpId() {
-			return spId;
+		public Long getSpDocId() {
+			return spDocId;
 		}
 
-		public void setSpId(String spId) {
-			this.spId = spId;
+		public void setSpDocId(Long spDocId) {
+			this.spDocId = spDocId;
+		}
+
+		public ServiceProvider getServiceProvider() {
+			return serviceProvider;
+		}
+
+		public void setServiceProvider(ServiceProvider serviceProvider) {
+			this.serviceProvider = serviceProvider;
 		}
 
 		public String getSpDocName() {
@@ -52,29 +66,11 @@ public class RegisteredDocuments {
 		}
 
 		@Override
-		public int hashCode() {
-			return Objects.hash(spDocId, spDocName, spId);
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			RegisteredDocuments other = (RegisteredDocuments) obj;
-			return Objects.equals(spDocId, other.spDocId) && Objects.equals(spDocName, other.spDocName)
-					&& Objects.equals(spId, other.spId);
-		}
-
-		@Override
 		public String toString() {
-			return "RegisteredDocuments [spDocId=" + spDocId + ", spId=" + spId + ", spDocName=" + spDocName + "]";
+			return "RegisteredDocuments [spDocId=" + spDocId + ", serviceProvider=" + serviceProvider + ", spDocName="
+					+ spDocName + "]";
 		}
-	    
-	    
-	    
+
+		
 
 }
