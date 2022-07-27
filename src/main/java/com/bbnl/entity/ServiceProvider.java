@@ -2,11 +2,15 @@ package com.bbnl.entity;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -42,8 +46,8 @@ public class ServiceProvider {
 	@Column(name = "gst", length = 15)
 	private String gst;
 
-	@Column(name = "is_required")
-	private boolean isRequired;
+	@Column(name = "ill_required")
+	private boolean illRequired;
 
 	@Column(name = "service_state")
 	private int serviceState;
@@ -71,13 +75,15 @@ public class ServiceProvider {
 
 	@Column(name = "mobile_no", length = 10)
 	private String mobileNo;
+	
+	
 
 	public ServiceProvider() {
 		super();
 	}
 
 	public ServiceProvider(Long spId, String spName, int serviceType, String authorizedSignatory,
-			String signatoryAadharNo, String pan, String licenseNo, String tan, String gst, boolean isRequired,
+			String signatoryAadharNo, String pan, String licenseNo, String tan, String gst, boolean illRequired,
 			int serviceState, int serviceDistrict, int serviceBlock, String addressLine1, String addressLine2,
 			int state, int district, String emailId, String mobileNo) {
 		super();
@@ -90,7 +96,7 @@ public class ServiceProvider {
 		this.licenseNo = licenseNo;
 		this.tan = tan;
 		this.gst = gst;
-		this.isRequired = isRequired;
+		this.illRequired = illRequired;
 		this.serviceState = serviceState;
 		this.serviceDistrict = serviceDistrict;
 		this.serviceBlock = serviceBlock;
@@ -174,12 +180,12 @@ public class ServiceProvider {
 		this.gst = gst;
 	}
 
-	public boolean isRequired() {
-		return isRequired;
+	public boolean getIllRequired() {
+		return illRequired;
 	}
 
-	public void setRequired(boolean isRequired) {
-		this.isRequired = isRequired;
+	public void setIllRequired(boolean illRequired) {
+		this.illRequired = illRequired;
 	}
 
 	public int getServiceState() {
@@ -256,7 +262,7 @@ public class ServiceProvider {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(addressLine1, addressLine2, authorizedSignatory, district, emailId, gst, isRequired,
+		return Objects.hash(addressLine1, addressLine2, authorizedSignatory, district, emailId, gst, illRequired,
 				licenseNo, mobileNo, pan, serviceBlock, serviceDistrict, serviceState, serviceType, signatoryAadharNo,
 				spId, spName, state, tan);
 	}
@@ -273,7 +279,7 @@ public class ServiceProvider {
 		return Objects.equals(addressLine1, other.addressLine1) && Objects.equals(addressLine2, other.addressLine2)
 				&& Objects.equals(authorizedSignatory, other.authorizedSignatory) && district == other.district
 				&& Objects.equals(emailId, other.emailId) && Objects.equals(gst, other.gst)
-				&& isRequired == other.isRequired && Objects.equals(licenseNo, other.licenseNo)
+				&& illRequired == other.illRequired && Objects.equals(licenseNo, other.licenseNo)
 				&& Objects.equals(mobileNo, other.mobileNo) && Objects.equals(pan, other.pan)
 				&& serviceBlock == other.serviceBlock && serviceDistrict == other.serviceDistrict
 				&& serviceState == other.serviceState && serviceType == other.serviceType
@@ -285,7 +291,7 @@ public class ServiceProvider {
 	public String toString() {
 		return "ServiceProvider [spId=" + spId + ", spName=" + spName + ", serviceType=" + serviceType
 				+ ", authorizedSignatory=" + authorizedSignatory + ", signatoryAadharNo=" + signatoryAadharNo + ", pan="
-				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", isRequired=" + isRequired
+				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", isRequired=" + illRequired
 				+ ", serviceState=" + serviceState + ", serviceDistrict=" + serviceDistrict + ", serviceBlock="
 				+ serviceBlock + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", state="
 				+ state + ", district=" + district + ", emailId=" + emailId + ", mobileNo=" + mobileNo + "]";

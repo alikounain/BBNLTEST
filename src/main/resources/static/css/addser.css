@@ -10,7 +10,7 @@ body {
 	border-radius: 5px;
 	/*width: 100%; */
 	position:absolute;
-	top: 50px;
+	top: -600px;
 	width:98.5%;
 	margin-left:10px;
 	padding: 30px;
@@ -25,6 +25,19 @@ body {
   
 }
 
+.cc1 {
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 5px;
+	/*width: 100%; */
+	position:absolute;
+	top: 430px;
+	width:100%;
+	right:8px;
+	/* margin-right:1000px; */
+	padding: 30px;
+}
+
 
 
 .navbar-custom {
@@ -32,3 +45,25 @@ body {
   margin-top: 0px
 }
 
+
+.rk {
+  position: relative;
+  overflow: hidden;
+  width: 10%;
+}
+
+.cc2 {
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 5px;
+	position:absolute;
+	margin-top: 675px;
+	
+}
+.pk {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
