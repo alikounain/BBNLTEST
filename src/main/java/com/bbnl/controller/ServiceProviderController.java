@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbnl.FileUploadUtil;
@@ -34,6 +36,7 @@ import com.bbnl.service.StateService;
 import org.springframework.util.StringUtils;
 
 @Controller
+@RequestMapping("/user")
 public class ServiceProviderController {
 
 	@Autowired
@@ -142,5 +145,29 @@ public class ServiceProviderController {
 		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully");
 		return "redirect:/user";
 	}
+	//Edit connection
+		@RequestMapping("ServiceProviderList/edit/{id}")
+		public ModelAndView editConn(@PathVariable(name = "id") long id,Model model) {
+			
+			
+			
+			ModelAndView editView = new ModelAndView("editServiceProviderForm");
+			ServiceProvider serviceProvider = service.get(id);
+			
+			List<State> liststate = stateService.listAllState();
+			model.addAttribute("liststate", liststate);
+			
+			List<District> listDistrict = districtService.listAllDistrict();
+			model.addAttribute("listDistrict", listDistrict);
+			
+			List<Block> listBlock = blockService.listAllBlock();
+			model.addAttribute("listBlock", listBlock);
+			
+			
+			editView.addObject("serviceProvider", serviceProvider);		
+			return editView;
+		}
+	
+	
 
 }

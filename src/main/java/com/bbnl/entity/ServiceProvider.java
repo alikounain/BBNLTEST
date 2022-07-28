@@ -25,8 +25,9 @@ public class ServiceProvider {
 	@Column(name = "sp_name", length = 250)
 	private String spName;
 
-	@Column(name = "service_type")
-	private int serviceType;
+	@OneToOne(targetEntity = ServiceType.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_type")
+	private ServiceType serviceType;
 
 	@Column(name = "authorized_signatory", length = 250)
 	private String authorizedSignatory;
@@ -49,14 +50,18 @@ public class ServiceProvider {
 	@Column(name = "ill_required")
 	private boolean illRequired;
 
-	@Column(name = "service_state")
-	private int serviceState;
+	@OneToOne(targetEntity = State.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_state")
+	private State serviceState;
 
-	@Column(name = "service_district")
-	private int serviceDistrict;
+	
+	@OneToOne(targetEntity = District.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_district")
+	private District serviceDistrict;
 
-	@Column(name = "service_block")
-	private int serviceBlock;
+	@OneToOne(targetEntity = Block.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_block")
+	private Block serviceBlock;
 
 	@Column(name = "address_line1", length = 250)
 	private String addressLine1;
@@ -64,28 +69,28 @@ public class ServiceProvider {
 	@Column(name = "address_line2", length = 250)
 	private String addressLine2;
 
-	@Column(name = "state")
-	private int state;
+	@OneToOne(targetEntity =State.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "state")
+	private State state;
 
-	@Column(name = "district")
-	private int district;
+	@OneToOne(targetEntity = District.class,fetch = FetchType.LAZY)
+	@JoinColumn(name = "district")
+	private District district;
 
 	@Column(name = "email_id", length = 100)
 	private String emailId;
 
 	@Column(name = "mobile_no", length = 10)
 	private String mobileNo;
-	
-	
 
 	public ServiceProvider() {
 		super();
 	}
 
-	public ServiceProvider(Long spId, String spName, int serviceType, String authorizedSignatory,
+	public ServiceProvider(Long spId, String spName, ServiceType serviceType, String authorizedSignatory,
 			String signatoryAadharNo, String pan, String licenseNo, String tan, String gst, boolean illRequired,
-			int serviceState, int serviceDistrict, int serviceBlock, String addressLine1, String addressLine2,
-			int state, int district, String emailId, String mobileNo) {
+			State serviceState, District serviceDistrict, Block serviceBlock, String addressLine1, String addressLine2,
+			State state, District district, String emailId, String mobileNo) {
 		super();
 		this.spId = spId;
 		this.spName = spName;
@@ -124,11 +129,11 @@ public class ServiceProvider {
 		this.spName = spName;
 	}
 
-	public int getServiceType() {
+	public ServiceType getServiceType() {
 		return serviceType;
 	}
 
-	public void setServiceType(int serviceType) {
+	public void setServiceType(ServiceType serviceType) {
 		this.serviceType = serviceType;
 	}
 
@@ -180,7 +185,7 @@ public class ServiceProvider {
 		this.gst = gst;
 	}
 
-	public boolean getIllRequired() {
+	public boolean isIllRequired() {
 		return illRequired;
 	}
 
@@ -188,27 +193,27 @@ public class ServiceProvider {
 		this.illRequired = illRequired;
 	}
 
-	public int getServiceState() {
+	public State getServiceState() {
 		return serviceState;
 	}
 
-	public void setServiceState(int serviceState) {
+	public void setServiceState(State serviceState) {
 		this.serviceState = serviceState;
 	}
 
-	public int getServiceDistrict() {
+	public District getServiceDistrict() {
 		return serviceDistrict;
 	}
 
-	public void setServiceDistrict(int serviceDistrict) {
+	public void setServiceDistrict(District serviceDistrict) {
 		this.serviceDistrict = serviceDistrict;
 	}
 
-	public int getServiceBlock() {
+	public Block getServiceBlock() {
 		return serviceBlock;
 	}
 
-	public void setServiceBlock(int serviceBlock) {
+	public void setServiceBlock(Block serviceBlock) {
 		this.serviceBlock = serviceBlock;
 	}
 
@@ -228,19 +233,19 @@ public class ServiceProvider {
 		this.addressLine2 = addressLine2;
 	}
 
-	public int getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 
-	public int getDistrict() {
+	public District getDistrict() {
 		return district;
 	}
 
-	public void setDistrict(int district) {
+	public void setDistrict(District district) {
 		this.district = district;
 	}
 
@@ -262,9 +267,8 @@ public class ServiceProvider {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(addressLine1, addressLine2, authorizedSignatory, district, emailId, gst, illRequired,
-				licenseNo, mobileNo, pan, serviceBlock, serviceDistrict, serviceState, serviceType, signatoryAadharNo,
-				spId, spName, state, tan);
+		return Objects.hash(addressLine1, addressLine2, authorizedSignatory, emailId, gst, illRequired, licenseNo,
+				mobileNo, pan, signatoryAadharNo, spId, spName, tan);
 	}
 
 	@Override
@@ -277,21 +281,19 @@ public class ServiceProvider {
 			return false;
 		ServiceProvider other = (ServiceProvider) obj;
 		return Objects.equals(addressLine1, other.addressLine1) && Objects.equals(addressLine2, other.addressLine2)
-				&& Objects.equals(authorizedSignatory, other.authorizedSignatory) && district == other.district
+				&& Objects.equals(authorizedSignatory, other.authorizedSignatory)
 				&& Objects.equals(emailId, other.emailId) && Objects.equals(gst, other.gst)
 				&& illRequired == other.illRequired && Objects.equals(licenseNo, other.licenseNo)
 				&& Objects.equals(mobileNo, other.mobileNo) && Objects.equals(pan, other.pan)
-				&& serviceBlock == other.serviceBlock && serviceDistrict == other.serviceDistrict
-				&& serviceState == other.serviceState && serviceType == other.serviceType
 				&& Objects.equals(signatoryAadharNo, other.signatoryAadharNo) && Objects.equals(spId, other.spId)
-				&& Objects.equals(spName, other.spName) && state == other.state && Objects.equals(tan, other.tan);
+				&& Objects.equals(spName, other.spName) && Objects.equals(tan, other.tan);
 	}
 
 	@Override
 	public String toString() {
 		return "ServiceProvider [spId=" + spId + ", spName=" + spName + ", serviceType=" + serviceType
 				+ ", authorizedSignatory=" + authorizedSignatory + ", signatoryAadharNo=" + signatoryAadharNo + ", pan="
-				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", isRequired=" + illRequired
+				+ pan + ", licenseNo=" + licenseNo + ", tan=" + tan + ", gst=" + gst + ", illRequired=" + illRequired
 				+ ", serviceState=" + serviceState + ", serviceDistrict=" + serviceDistrict + ", serviceBlock="
 				+ serviceBlock + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", state="
 				+ state + ", district=" + district + ", emailId=" + emailId + ", mobileNo=" + mobileNo + "]";

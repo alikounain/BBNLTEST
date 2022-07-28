@@ -28,7 +28,7 @@ public class SProviderService {
 	}
 	
 	public void delete(Long id) {
-		serviceProviderRepository.deleteById(id);
+		serviceProviderRepository.deleteById( id);
 		
 	}
 	
