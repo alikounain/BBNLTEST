@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "service_provider_documents")
 public class RegisteredDocuments {
@@ -24,7 +27,8 @@ public class RegisteredDocuments {
 		@Column(name = "sp_doc_id")
 	    private Long spDocId;
 	  
-		@OneToOne(cascade = CascadeType.ALL)
+		@OnDelete(action = OnDeleteAction.CASCADE)
+		@OneToOne()
 		@JoinColumn(name = "sp_id")
 	    private ServiceProvider serviceProvider;
 	     

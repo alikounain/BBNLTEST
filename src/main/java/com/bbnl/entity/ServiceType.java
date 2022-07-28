@@ -12,6 +12,8 @@ public class ServiceType {
 	@Id
 	@Column(name = "service_id")
 	private Long serviceId;
+	
+	
 	@Column(name = "service_name")
 	private String serviceNname;
 	
